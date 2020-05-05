@@ -1,5 +1,6 @@
 package com.example.laboratorio3.controller;
 
+import com.example.laboratorio3.dto.gerenteExperiencia;
 import com.example.laboratorio3.dto.mayorSalario;
 import com.example.laboratorio3.repository.EmployeesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,10 @@ public class SearchController {
     }
 
     @GetMapping("/gerenteExperiencia")
-    public String gerenteExperiencia() {
+    public String gerenteExperiencia(Model m) {
+        List<gerenteExperiencia> gerenteExperiencias = employeesRepository.obtenerGerenteExperiencia();
+        m.addAttribute("lista",gerenteExperiencias);
+
         return "Search/gerentesExperiencia";
     }
 //COMPLETAR
