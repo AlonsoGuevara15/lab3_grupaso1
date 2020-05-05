@@ -30,4 +30,8 @@ public interface EmployeesRepository extends JpaRepository<Employees,Integer> {
             "having sum(DATEDIFF(jh.end_date,jh.start_date)/365)>5\n" +
             "\n",nativeQuery = true)
     List<gerenteExperiencia> obtenerGerenteExperiencia();
+
+    List<Employees> findByFirst_nameOrLast_name(String nombre);
+
+
 }

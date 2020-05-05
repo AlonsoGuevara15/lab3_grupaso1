@@ -11,16 +11,18 @@
 
         <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
 
-        <form class="input-group mb-lg-3" method="post" th:action="@{}">                <!-- COMPLETAR -->
+        <form class="input-group mb-lg-3" method="post" th:action="@{/employee/buscarEmpleado}">                <!-- COMPLETAR -->
             <!-- COMPLETAR -->
+            <input name="searchField" class="form-control mb-3" type="text" placeholder="Buscar"/>
             <div class="input-group-append">
                 <!-- COMPLETAR -->
+
             </div>
         </form>
 
         <!-- COMPLETAR -->
         <!-- COMPLETAR -->
-            <table class="table table-sm" th:if="${}">
+            <table class="table table-sm" >
                 <thead>
                 <tr>
                     <!-- COMPLETAR -->

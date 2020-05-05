@@ -102,5 +102,12 @@ public class EmployeeController {
     }
 
     //COMPLETAR
+    @PostMapping("/buscarEmpleado")
+    public String buscarPorNombreRegion(@RequestParam("searchField") String sf,
+                                        Model model) {
+        List<Employees> listaEmp = employeeRepository.findByFirst_nameOrLast_name(sf);
+        model.addAttribute("lista", listaEmp);
+        return "region/listar";
+    }
 
 }
