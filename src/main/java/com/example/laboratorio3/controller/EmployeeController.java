@@ -72,11 +72,11 @@ public class EmployeeController {
                 return "employee/editFrm";
             } else {
                 attr.addFlashAttribute("msg2","No se puede editar un empleado sin Jefe");
-                return "redirect:/employee/list";
+                return "redirect:/employee/lista";
             }
 
         } else {
-            return "redirect:/employee/list";
+            return "redirect:/employee/lista";
         }
     }
 
@@ -87,7 +87,7 @@ public class EmployeeController {
         if (opt.isPresent()) {
             employeeRepository.deleteById(id);
         }
-        return "redirect:/employee/list";
+        return "redirect:/employee/lista";
     }
 
     //COMPLETAR
