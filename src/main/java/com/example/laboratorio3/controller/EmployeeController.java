@@ -1,7 +1,11 @@
 package com.example.laboratorio3.controller;
 
+import com.example.laboratorio3.entity.Departments;
 import com.example.laboratorio3.entity.Employees;
+import com.example.laboratorio3.entity.Job;
+import com.example.laboratorio3.repository.DespartmentsRepository;
 import com.example.laboratorio3.repository.EmployeesRepository;
+import com.example.laboratorio3.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,11 @@ public class EmployeeController {
     //COMPLETAR
     @Autowired
     EmployeesRepository employeeRepository;
+    @Autowired
+    DespartmentsRepository despartmentsRepository;
+    @Autowired
+    JobRepository jobRepository;
+
 
     @GetMapping("/list")
     public String listaEmployee(Model model){
@@ -34,11 +43,11 @@ public class EmployeeController {
     @GetMapping("/create")
     public String nuevoEmployeeForm(Model model) {
         //COMPLETAR
-        //List<Job> listaJob = jobRepository.findAll();
-        //List<Department> listaDep = departmentRepository.findAll();
+        List<Job> listaJob = jobRepository.findAll();
+        List<Departments> listaDep = despartmentsRepository.findAll();
         List<Employees> listaMan = employeeRepository.findAll();
-        //model.addAttribute("listaJob", listaJob);
-        //model.addAttribute("listaDep", listaDep);
+        model.addAttribute("listaJob", listaJob);
+        model.addAttribute("listaDep", listaDep);
         model.addAttribute("listaMan", listaMan);
         return "employee/newFrm";
     }
