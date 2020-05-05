@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Reporte de departamentos por país y ciudad</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/fragmento.html :: cabecera('Reporte: DepartamentoPaisCiudad')">
+
     </head>
     <body>
-        <h1>Reporte de departamentos por país y ciudad</h1>
+        <div class="container">
+            <h1>Reporte de Departamento por Pais y Ciudad</h1>
+
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <td>Pais</td>
+                        <td>Ciudad</td>
+                        <td>Cantidad</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="Pc, i:${obtenerDepartamentoPaisCiudad}">
+                        <td th:text="${Pc.pais}"></td>
+                        <td th:text="${Pc.ciudad}"></td>
+                        <td th:text="${Pc.cantidad}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>

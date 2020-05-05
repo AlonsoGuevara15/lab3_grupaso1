@@ -30,6 +30,7 @@ public class HistoryController {
     @Autowired
     DespartmentsRepository despartmentsRepository;
 
+
     @GetMapping("lista")
     public String Historial(Model model){
 
@@ -43,6 +44,12 @@ public class HistoryController {
         model.addAttribute("listaDepartement",listaDepartement);
 
         return "history/lista";
+    }
+
+    @GetMapping("reporteDepartamentoPaisCiudad")
+    public String reporteDepartamentoPaisCiudad(Model model){
+        model.addAttribute("obtenerDepartamentoPaisCiudad",despartmentsRepository.obtenerDepartamentoPaisCiudad());
+        return "Search/departamentoPaisCiudad";
     }
 
 }
