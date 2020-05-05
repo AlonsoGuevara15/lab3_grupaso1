@@ -1,11 +1,8 @@
 package com.example.laboratorio3.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 //COMPLETAR
 @Entity
@@ -26,13 +23,17 @@ public class Employees {
     @Column(nullable = false)
     private LocalDate hire_date;
 
+    @ManyToOne
+    @JoinColumn(name = "job_id")
     @Column(nullable = false)
-    private String job_id;
+    private Job job;
     private BigDecimal salary;
     private BigDecimal commission_pct;
     private String manager_id;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
     @Column(nullable = false)
-    private int department_id;
+    private Departments department;
     private int enabled;
 
 
@@ -85,12 +86,12 @@ public class Employees {
         this.hire_date = hire_date;
     }
 
-    public String getJob_id() {
-        return job_id;
+    public Job getJob() {
+        return job;
     }
 
-    public void setJob_id(String job_id) {
-        this.job_id = job_id;
+    public void setJob(Job job_id) {
+        this.job = job_id;
     }
 
     public BigDecimal getSalary() {
@@ -117,12 +118,12 @@ public class Employees {
         this.manager_id = manager_id;
     }
 
-    public int getDepartment_id() {
-        return department_id;
+    public Departments getDepartment() {
+        return department;
     }
 
-    public void setDepartment_id(int department_id) {
-        this.department_id = department_id;
+    public void setDepartment(Departments department_id) {
+        this.department = department_id;
     }
 
     public int getEnabled() {
