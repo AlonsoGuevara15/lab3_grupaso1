@@ -25,14 +25,12 @@ public class Employees {
 
     @ManyToOne
     @JoinColumn(name = "job_id")
-    @Column(nullable = false)
     private Job job;
     private BigDecimal salary;
     private BigDecimal commission_pct;
     private String manager_id;
     @ManyToOne
     @JoinColumn(name = "department_id")
-    @Column(nullable = false)
     private Departments department;
     private int enabled;
 
