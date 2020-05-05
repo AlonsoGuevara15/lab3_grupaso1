@@ -18,8 +18,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="emp, i:${listaEmployee}">
-                        <td th:text="${emp.first_name}"></td>
+                    <tr th:each="h, i:${listaHistory}">
+                        <td th:text="${h.employeeid.first_name}"></td>
                         <td th:text="${emp.last_name}"></td>
                         <td th:text="${emp.email}"></td>
                         <td th:text="${emp.phone_number}"></td>

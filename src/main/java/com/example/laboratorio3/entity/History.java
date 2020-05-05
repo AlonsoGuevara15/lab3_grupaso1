@@ -13,7 +13,7 @@ public class History {
     private String startdate;
     @ManyToOne
     @JoinColumn(name="employee_id",nullable = false)
-    private Employees employeeid;
+    private Employees employee;
 
     public int getJobhistoryid() {
         return jobhistoryid;
@@ -31,11 +31,11 @@ public class History {
         this.startdate = startdate;
     }
 
-    public Employees getEmployeeid() {
-        return employeeid;
+    public Employees getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeid(Employees employeeid) {
-        this.employeeid = employeeid;
+    public void setEmployee(Employees employee) {
+        this.employee = employee;
     }
 }
