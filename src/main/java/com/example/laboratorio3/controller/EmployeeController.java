@@ -54,16 +54,21 @@ public class EmployeeController {
 
 
     @PostMapping("/save")
-    public String guardarEmployee(Employees employees) {
+    public String guardarEmployee(Employees employees,
+                                  RedirectAttributes attr) {
         //COMPLETAR
+        if(employees.getEmployeeid()!=null) {
+            attr.addFlashAttribute("msg","Empleado actualizado exitosamente");
+        } else {
+            attr.addFlashAttribute("msg","Empleado creado exitosamente");
+        }
         employeeRepository.save(employees);
         return "redirect:/employee/lista";
     }
 
     @GetMapping("/edit")
     public String editarEmployee(@RequestParam("id") int id,
-                                 Model model,
-                                 RedirectAttributes attr) {
+                                 Model model) {
         //COMPLETAR
         Optional<Employees> opt = employeeRepository.findById(id);
         if (opt.isPresent()) {
@@ -77,12 +82,7 @@ public class EmployeeController {
             model.addAttribute("listaMan", listaMan);
             model.addAttribute("employee", employees);
 
-            if(employees.getManager_id()!=null) {
-                return "employee/editFrm";
-            } else {
-                attr.addFlashAttribute("msg2","No se puede editar un empleado sin Jefe");
-                return "redirect:/employee/lista";
-            }
+            return "employee/editFrm";
 
         } else {
             return "redirect:/employee/lista";
@@ -90,11 +90,13 @@ public class EmployeeController {
     }
 
 
-    public String borrarEmpleado(@RequestParam("id") int id) {
+    public String borrarEmpleado(@RequestParam("id") int id,
+                                 RedirectAttributes attr) {
        //COMPLETAR
         Optional<Employees> opt = employeeRepository.findById(id);
         if (opt.isPresent()) {
             employeeRepository.deleteById(id);
+            attr.addFlashAttribute("msg", "Empleado borrado exitosamente");
         }
         return "redirect:/employee/lista";
     }

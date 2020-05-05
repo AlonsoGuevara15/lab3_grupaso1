@@ -9,6 +9,8 @@
         <h1>Lista de Empleados</h1>
         <a class="btn btn-primary mt-4 mb-4" th:href="@{'/employee/newFrm'}">Nuevo Empleado</a>                 <!-- COMPLETAR -->
 
+        <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+
         <form class="input-group mb-lg-3" method="post" th:action="@{}">                <!-- COMPLETAR -->
             <!-- COMPLETAR -->
             <div class="input-group-append">
