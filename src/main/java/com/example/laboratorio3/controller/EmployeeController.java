@@ -1,7 +1,11 @@
 package com.example.laboratorio3.controller;
 
+import com.example.laboratorio3.entity.Departments;
 import com.example.laboratorio3.entity.Employees;
+import com.example.laboratorio3.entity.Job;
+import com.example.laboratorio3.repository.DespartmentsRepository;
 import com.example.laboratorio3.repository.EmployeesRepository;
+import com.example.laboratorio3.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,11 @@ public class EmployeeController {
     //COMPLETAR
     @Autowired
     EmployeesRepository employeeRepository;
+    @Autowired
+    DespartmentsRepository despartmentsRepository;
+    @Autowired
+    JobRepository jobRepository;
+
 
     @GetMapping("/list")
     public String listaEmployee(Model model){
@@ -34,46 +43,46 @@ public class EmployeeController {
     @GetMapping("/create")
     public String nuevoEmployeeForm(Model model) {
         //COMPLETAR
-        //List<Job> listaJob = jobRepository.findAll();
-        //List<Department> listaDep = departmentRepository.findAll();
+        List<Job> listaJob = jobRepository.findAll();
+        List<Departments> listaDep = despartmentsRepository.findAll();
         List<Employees> listaMan = employeeRepository.findAll();
-        //model.addAttribute("listaJob", listaJob);
-        //model.addAttribute("listaDep", listaDep);
+        model.addAttribute("listaJob", listaJob);
+        model.addAttribute("listaDep", listaDep);
         model.addAttribute("listaMan", listaMan);
         return "employee/newFrm";
     }
 
 
     @PostMapping("/save")
-    public String guardarEmployee(Employees employees) {
+    public String guardarEmployee(Employees employees,
+                                  RedirectAttributes attr) {
         //COMPLETAR
+        if(employees.getEmployeeid()!=null) {
+            attr.addFlashAttribute("msg","Empleado actualizado exitosamente");
+        } else {
+            attr.addFlashAttribute("msg","Empleado creado exitosamente");
+        }
         employeeRepository.save(employees);
         return "redirect:/employee/lista";
     }
 
     @GetMapping("/edit")
     public String editarEmployee(@RequestParam("id") int id,
-                                 Model model,
-                                 RedirectAttributes attr) {
+                                 Model model) {
         //COMPLETAR
         Optional<Employees> opt = employeeRepository.findById(id);
         if (opt.isPresent()) {
             Employees employees =opt.get();
 
-            //List<Job> listaJob = jobRepository.findAll();
-            //List<Department> listaDep = departmentRepository.findAll();
+            List<Job> listaJob = jobRepository.findAll();
+            List<Departments> listaDep = despartmentsRepository.findAll();
             List<Employees> listaMan = employeeRepository.findAll();
-            //model.addAttribute("listaJob", listaJob);
-            //model.addAttribute("listaDep", listaDep);
-            //model.addAttribute("listaMan", listaMan);
+            model.addAttribute("listaJob", listaJob);
+            model.addAttribute("listaDep", listaDep);
+            model.addAttribute("listaMan", listaMan);
             model.addAttribute("employee", employees);
 
-            if(employees.getManager_id()!=null) {
-                return "employee/editFrm";
-            } else {
-                attr.addFlashAttribute("msg2","No se puede editar un empleado sin Jefe");
-                return "redirect:/employee/lista";
-            }
+            return "employee/editFrm";
 
         } else {
             return "redirect:/employee/lista";
@@ -81,15 +90,24 @@ public class EmployeeController {
     }
 
 
-    public String borrarEmpleado(@RequestParam("id") int id) {
+    public String borrarEmpleado(@RequestParam("id") int id,
+                                 RedirectAttributes attr) {
        //COMPLETAR
         Optional<Employees> opt = employeeRepository.findById(id);
         if (opt.isPresent()) {
             employeeRepository.deleteById(id);
+            attr.addFlashAttribute("msg", "Empleado borrado exitosamente");
         }
         return "redirect:/employee/lista";
     }
 
     //COMPLETAR
+    @PostMapping("/buscarEmpleado")
+    public String buscarPorNombreRegion(@RequestParam("searchField") String sf,
+                                        Model model) {
+        List<Employees> listaEmp = employeeRepository.findByFirst_nameOrLast_name(sf);
+        model.addAttribute("lista", listaEmp);
+        return "region/listar";
+    }
 
 }
