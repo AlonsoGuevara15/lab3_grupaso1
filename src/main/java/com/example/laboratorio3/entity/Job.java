@@ -14,6 +14,16 @@ public class Job {
     private String jobid;
     @Column(name="job_title",nullable = false)
     private String jobtitle;
+    @Column(name="max_salary")
+    private String max;
+
+    public String getMax() {
+        return max;
+    }
+
+    public void setMax(String max) {
+        this.max = max;
+    }
 
     public String getJobid() {
         return jobid;
