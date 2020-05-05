@@ -69,12 +69,12 @@ public class EmployeeController {
         if (opt.isPresent()) {
             Employees employees =opt.get();
 
-            //List<Job> listaJob = jobRepository.findAll();
-            //List<Department> listaDep = departmentRepository.findAll();
+            List<Job> listaJob = jobRepository.findAll();
+            List<Departments> listaDep = despartmentsRepository.findAll();
             List<Employees> listaMan = employeeRepository.findAll();
-            //model.addAttribute("listaJob", listaJob);
-            //model.addAttribute("listaDep", listaDep);
-            //model.addAttribute("listaMan", listaMan);
+            model.addAttribute("listaJob", listaJob);
+            model.addAttribute("listaDep", listaDep);
+            model.addAttribute("listaMan", listaMan);
             model.addAttribute("employee", employees);
 
             if(employees.getManager_id()!=null) {

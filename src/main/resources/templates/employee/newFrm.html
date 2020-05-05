@@ -37,8 +37,8 @@
             <div class="row">
                 <div class="form-group col-6">
                     <!-- COMPLETAR -->
-                    <label for="job_id">Puesto</label>
-                    <select class="form-control" name="job_id" id="job_id">
+                    <label for="jobid">Puesto</label>
+                    <select class="form-control" name="jobid" id="jobid">
                         <option th:each="job : ${listaJob}" th:value="${job.jobid}" th:text="${job.jobtitle}"></option>
                     </select>
                 </div>
