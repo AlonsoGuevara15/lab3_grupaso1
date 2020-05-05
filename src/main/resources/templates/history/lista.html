@@ -19,16 +19,11 @@
                 </thead>
                 <tbody>
                     <tr th:each="h, i:${listaHistory}">
-                        <td th:text="${h.employeeid.first_name}"></td>
-                        <td th:text="${emp.last_name}"></td>
-                        <td th:text="${emp.email}"></td>
-                        <td th:text="${emp.phone_number}"></td>
-
-                        <td th:text="${emp.job_id}"></td>
-                        <td th:text="${emp.salary}"></td>
-                        <td th:text="${emp.commission_pct==null}? 'Sin comisión' : ${emp.commission_pct}"></td>
-                        <td th:text="${emp.manager_id==null}? 'Sin jefe' : ${emp.manager_id}"></td>
-                        <td th:text="${emp.department_id}"></td>
+                        <td th:text="${h.employee.first_name}"></td>
+                        <td th:text="${h.employee.last_name}"></td>
+                        <td th:text="${h.job.jobtitle}"></td>
+                        <td th:text="${h.departments.departmentname}"></td>
+                        <td th:text="${h.startdate}"></td>
                     </tr>
                 </tbody>
             </table>
